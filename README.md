@@ -1,5 +1,5 @@
 # Claude-blast-for-token-stealers
-
+[English](README_EN.md)
 以蜜罐形式对抗窃取 API token 的攻击者。对外完全模拟 Anthropic Claude Messages API 协议，背后是随机输出 token 的生成器，让攻击者浪费资源而无法获得任何有价值的响应。
 
 ## 快速开始
