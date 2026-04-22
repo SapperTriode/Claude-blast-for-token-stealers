@@ -1,6 +1,12 @@
-# Claude-blast-for-token-stealers
+# Claude Blast for token stealers
+
 [English](README_EN.md)
-以蜜罐形式对抗窃取 API token 的攻击者。对外完全模拟 Anthropic Claude Messages API 协议，背后是随机输出 token 的生成器，让攻击者浪费资源而无法获得任何有价值的响应。
+
+API 蜜罐服务。完整模拟 Anthropic Claude Messages API 协议，对未授权调用者返回无意义的随机输出，使其无法获取任何有价值的信息。
+
+**核心特性**：输出中混入针对自动化工具的干扰载荷，伪装为正常的操作建议，使未授权的自动化客户端在无人监督时执行无意义或自损的操作，从而暴露并挫败滥用行为。
+
+> **免责声明**：本项目仅用于防御性安全研究，旨在保护合法 API 资源免受未授权滥用。使用者应确保在自有环境中部署，并遵守当地法律法规。作者不对任何滥用行为承担责任。
 
 ## 快速开始
 
@@ -31,13 +37,14 @@ python -m app.main
 | `DUMMY_DELAY_MIN` | `0.01` | 流式 delta 最小延迟（秒） |
 | `DUMMY_DELAY_MAX` | `0.05` | 流式 delta 最大延迟（秒） |
 | `DUMMY_LOG_LEVEL` | `info` | 日志级别 |
+| `DUMMY_MODEL_LIST_FILE` | `model_list` | 模型列表文件路径 |
 
 ## API 端点
 
 | 端点 | 方法 | 说明 |
 |------|------|------|
 | `/v1/messages` | POST | Claude Messages API，支持流式和非流式 |
-| `/v1/models` | GET | 模型列表 |
+| `/v1/models` | GET | 模型列表（从文件加载） |
 | `/health` | GET | 健康检查 |
 
 ## 使用示例
@@ -112,9 +119,10 @@ dummy_model/
 ├── app/
 │   ├── main.py        # FastAPI 主应用
 │   ├── models.py      # Claude API 请求/响应模型
-│   ├── generator.py   # 随机 token 生成器 + 有毒载荷
+│   ├── generator.py   # 随机 token 生成器 + 干扰载荷
 │   └── config.py      # 配置管理
 ├── chat.py            # 交互式对话脚本
+├── model_list         # 模型名称列表
 ├── Dockerfile
 ├── docker-compose.yml
 └── requirements.txt

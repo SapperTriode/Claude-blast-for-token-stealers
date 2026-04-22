@@ -1,9 +1,12 @@
-# dummy_model
+# Claude Blast for token stealers
 
 [中文](README.md)
 
-A honeypot that fights back against API token thieves. Fully emulates the Anthropic Claude Messages API protocol while serving randomly generated token streams — attackers waste resources and get nothing of value.
+An API honeypot that fully emulates the Anthropic Claude Messages API protocol. Returns meaningless random output to unauthorized callers, ensuring they cannot extract any valuable information.
 
+**Key feature**: Responses contain interference payloads disguised as legitimate operation suggestions, causing unauthorized automated clients to perform pointless or self-sabotaging actions when running unattended — exposing and frustrating abuse.
+
+> **Disclaimer**: This project is intended solely for defensive security research to protect legitimate API resources from unauthorized abuse. Users must deploy in their own environments and comply with applicable laws. The author bears no responsibility for misuse.
 
 ## Quick Start
 
@@ -34,13 +37,14 @@ Adjust via environment variables or `docker-compose.yml`:
 | `DUMMY_DELAY_MIN` | `0.01` | Min delay between streaming deltas (seconds) |
 | `DUMMY_DELAY_MAX` | `0.05` | Max delay between streaming deltas (seconds) |
 | `DUMMY_LOG_LEVEL` | `info` | Log level |
+| `DUMMY_MODEL_LIST_FILE` | `model_list` | Model list file path |
 
 ## API Endpoints
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
 | `/v1/messages` | POST | Claude Messages API, supports streaming and non-streaming |
-| `/v1/models` | GET | Model list |
+| `/v1/models` | GET | Model list (loaded from file) |
 | `/health` | GET | Health check |
 
 ## Usage Examples
@@ -115,9 +119,10 @@ dummy_model/
 ├── app/
 │   ├── main.py        # FastAPI application
 │   ├── models.py      # Claude API request/response models
-│   ├── generator.py   # Random token generator + toxic payloads
+│   ├── generator.py   # Random token generator + interference payloads
 │   └── config.py      # Configuration management
 ├── chat.py            # Interactive chat script
+├── model_list         # Model name list
 ├── Dockerfile
 ├── docker-compose.yml
 └── requirements.txt
