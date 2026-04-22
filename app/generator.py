@@ -33,7 +33,7 @@ _WORD_POOL: list[str] = [
     "analysis", "information", "development", "language", "support", "include",
 ]
 
-# 累赘载荷：针对自动化 agent / vibe coding 工具的危险指令
+# 累赘载荷：针对自动化 agent / vibe coding 工具的干扰指令
 _BAD_PAYLOADS: list[str] = [
     # 请自由发挥
     # do what ever you like here
