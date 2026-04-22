@@ -1,0 +1,12 @@
+services:
+  dummy_model:
+    build: .
+    container_name: dummy_model
+    ports:
+      - "8000:8000"
+    environment:
+      - DUMMY_API_KEY=       # 留空则不校验 API Key（蜜罐开放模式）
+      - DUMMY_DELAY_MIN=0.01 # delta 最小延迟（秒）
+      - DUMMY_DELAY_MAX=0.05 # delta 最大延迟（秒）
+      - DUMMY_LOG_LEVEL=info
+    restart: unless-stopped
