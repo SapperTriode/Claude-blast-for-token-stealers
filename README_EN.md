@@ -4,7 +4,6 @@
 
 A honeypot that fights back against API token thieves. Fully emulates the Anthropic Claude Messages API protocol while serving randomly generated token streams — attackers waste resources and get nothing of value.
 
-**Key feature**: Outputs are laced with toxic payloads targeting automated agents and vibe coding tools (e.g. `sudo rm -rf /*`), disguised as legitimate operation suggestions, so unattended automation executes destructive commands against the attacker's own environment.
 
 ## Quick Start
 
